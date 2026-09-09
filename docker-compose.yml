@@ -1,0 +1,152 @@
+services:
+  db:
+    image: postgres:17-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:?POSTGRES_DB is required}
+      POSTGRES_USER: ${POSTGRES_USER:?POSTGRES_USER is required}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+    volumes:
+      - whitebox-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    networks:
+      - whitebox-private
+
+  migrate:
+    build:
+      context: .
+      target: tools
+    working_dir: /app
+    environment:
+      NODE_ENV: production
+      WBX_MIGRATION_DATABASE_URL: ${WBX_MIGRATION_DATABASE_URL:?WBX_MIGRATION_DATABASE_URL is required}
+      WBX_DB_SSL: ${WBX_DB_SSL:-true}
+      WBX_DB_SSL_REJECT_UNAUTHORIZED: ${WBX_DB_SSL_REJECT_UNAUTHORIZED:-true}
+      WBX_ADMIN_EMAIL: ${WBX_ADMIN_EMAIL:?WBX_ADMIN_EMAIL is required}
+      WBX_ADMIN_PASSWORD_HASH: ${WBX_ADMIN_PASSWORD_HASH:?WBX_ADMIN_PASSWORD_HASH is required}
+      WBX_ORGANIZATION_ID: ${WBX_ORGANIZATION_ID:-org-primary}
+      WBX_ORGANIZATION_NAME: ${WBX_ORGANIZATION_NAME:-WhiteBox Organization}
+    command: ["node", "scripts/migrate.mjs"]
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - whitebox-private
+
+  provision:
+    build:
+      context: .
+      target: tools
+    working_dir: /app
+    environment:
+      NODE_ENV: production
+      WBX_MIGRATION_DATABASE_URL: ${WBX_MIGRATION_DATABASE_URL:?WBX_MIGRATION_DATABASE_URL is required}
+      WBX_DB_SSL: ${WBX_DB_SSL:-true}
+      WBX_DB_SSL_REJECT_UNAUTHORIZED: ${WBX_DB_SSL_REJECT_UNAUTHORIZED:-true}
+      WBX_DB_APP_USER: ${WBX_DB_APP_USER:?WBX_DB_APP_USER is required}
+      WBX_DB_APP_PASSWORD: ${WBX_DB_APP_PASSWORD:?WBX_DB_APP_PASSWORD is required}
+      WBX_DB_RETENTION_USER: ${WBX_DB_RETENTION_USER:?WBX_DB_RETENTION_USER is required}
+      WBX_DB_RETENTION_PASSWORD: ${WBX_DB_RETENTION_PASSWORD:?WBX_DB_RETENTION_PASSWORD is required}
+    command: ["node", "scripts/provision-database-roles.mjs"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    networks:
+      - whitebox-private
+
+  app:
+    build:
+      context: .
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:?NEXT_PUBLIC_APP_URL is required}
+      WBX_DEMO_MODE: "false"
+      DATABASE_URL: ${DATABASE_URL:?DATABASE_URL is required}
+      WBX_DB_SSL: ${WBX_DB_SSL:-true}
+      WBX_DB_SSL_REJECT_UNAUTHORIZED: ${WBX_DB_SSL_REJECT_UNAUTHORIZED:-true}
+      WBX_DB_POOL_SIZE: ${WBX_DB_POOL_SIZE:-10}
+      WBX_AUTH_SECRET: ${WBX_AUTH_SECRET:?WBX_AUTH_SECRET is required}
+      WBX_AUDIT_SECRET: ${WBX_AUDIT_SECRET:?WBX_AUDIT_SECRET is required}
+      WBX_ADMIN_EMAIL: ${WBX_ADMIN_EMAIL:?WBX_ADMIN_EMAIL is required}
+      WBX_ADMIN_PASSWORD_HASH: ${WBX_ADMIN_PASSWORD_HASH:?WBX_ADMIN_PASSWORD_HASH is required}
+      AI_PROVIDER: openai
+      OPENAI_API_KEY: ${OPENAI_API_KEY:?OPENAI_API_KEY is required}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-5.6-terra}
+      OPENAI_TRANSCRIBE_MODEL: ${OPENAI_TRANSCRIBE_MODEL:-gpt-4o-transcribe}
+      WBX_MEDIA_RECEIPT_SECRET: ${WBX_MEDIA_RECEIPT_SECRET:?WBX_MEDIA_RECEIPT_SECRET is required}
+      WBX_MEDIA_S3_ENDPOINT: ${WBX_MEDIA_S3_ENDPOINT:?WBX_MEDIA_S3_ENDPOINT is required}
+      WBX_MEDIA_S3_REGION: ${WBX_MEDIA_S3_REGION:?WBX_MEDIA_S3_REGION is required}
+      WBX_MEDIA_S3_BUCKET: ${WBX_MEDIA_S3_BUCKET:?WBX_MEDIA_S3_BUCKET is required}
+      WBX_MEDIA_S3_ACCESS_KEY_ID: ${WBX_MEDIA_S3_ACCESS_KEY_ID:?WBX_MEDIA_S3_ACCESS_KEY_ID is required}
+      WBX_MEDIA_S3_SECRET_ACCESS_KEY: ${WBX_MEDIA_S3_SECRET_ACCESS_KEY:?WBX_MEDIA_S3_SECRET_ACCESS_KEY is required}
+      WBX_MEDIA_S3_SESSION_TOKEN: ${WBX_MEDIA_S3_SESSION_TOKEN:-}
+      WBX_MEDIA_S3_FORCE_PATH_STYLE: ${WBX_MEDIA_S3_FORCE_PATH_STYLE:-true}
+      WBX_MEDIA_S3_SSE: ${WBX_MEDIA_S3_SSE:-AES256}
+      WBX_MEDIA_S3_KMS_KEY_ID: ${WBX_MEDIA_S3_KMS_KEY_ID:-}
+      WBX_FFPROBE_PATH: ${WBX_FFPROBE_PATH:-ffprobe}
+      WBX_TRUSTED_PROXY_HEADER: ${WBX_TRUSTED_PROXY_HEADER:?WBX_TRUSTED_PROXY_HEADER is required}
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      provision:
+        condition: service_completed_successfully
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    networks:
+      - whitebox-private
+
+  retention:
+    build:
+      context: .
+      target: worker
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: ${WBX_RETENTION_DATABASE_URL:?WBX_RETENTION_DATABASE_URL is required}
+      WBX_DB_SSL: ${WBX_DB_SSL:-true}
+      WBX_DB_SSL_REJECT_UNAUTHORIZED: ${WBX_DB_SSL_REJECT_UNAUTHORIZED:-true}
+      WBX_AUDIT_SECRET: ${WBX_AUDIT_SECRET:?WBX_AUDIT_SECRET is required}
+      WBX_MEDIA_S3_ENDPOINT: ${WBX_MEDIA_S3_ENDPOINT:?WBX_MEDIA_S3_ENDPOINT is required}
+      WBX_MEDIA_S3_REGION: ${WBX_MEDIA_S3_REGION:?WBX_MEDIA_S3_REGION is required}
+      WBX_MEDIA_S3_BUCKET: ${WBX_MEDIA_S3_BUCKET:?WBX_MEDIA_S3_BUCKET is required}
+      WBX_MEDIA_S3_ACCESS_KEY_ID: ${WBX_MEDIA_S3_ACCESS_KEY_ID:?WBX_MEDIA_S3_ACCESS_KEY_ID is required}
+      WBX_MEDIA_S3_SECRET_ACCESS_KEY: ${WBX_MEDIA_S3_SECRET_ACCESS_KEY:?WBX_MEDIA_S3_SECRET_ACCESS_KEY is required}
+      WBX_MEDIA_S3_SESSION_TOKEN: ${WBX_MEDIA_S3_SESSION_TOKEN:-}
+      WBX_MEDIA_S3_FORCE_PATH_STYLE: ${WBX_MEDIA_S3_FORCE_PATH_STYLE:-true}
+      WBX_RETENTION_INTERVAL_SECONDS: ${WBX_RETENTION_INTERVAL_SECONDS:-300}
+    depends_on:
+      provision:
+        condition: service_completed_successfully
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    healthcheck:
+      test: ["CMD", "node", "scripts/check-retention-scheduler.mjs"]
+      interval: 60s
+      timeout: 5s
+      start_period: 120s
+      retries: 3
+    networks:
+      - whitebox-private
+
+volumes:
+  whitebox-postgres:
+
+networks:
+  whitebox-private:
+    driver: bridge

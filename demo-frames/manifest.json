@@ -1,0 +1,394 @@
+{
+  "transitionSeconds": 0.2,
+  "shots": [
+    {
+      "image": "01-login.png",
+      "duration": 2.3,
+      "zoom": { "from": 1, "to": 1.025 },
+      "pan": {
+        "from": { "x": 0.5, "y": 0.5 },
+        "to": { "x": 0.5, "y": 0.54 }
+      },
+      "cursor": {
+        "start": { "x": 0.48, "y": 0.61 },
+        "end": { "x": 0.5, "y": 0.72 }
+      }
+    },
+    {
+      "image": "02-dashboard.png",
+      "duration": 2.4,
+      "zoom": { "from": 1.01, "to": 1.035 },
+      "pan": {
+        "from": { "x": 0.5, "y": 0.43 },
+        "to": { "x": 0.62, "y": 0.38 }
+      },
+      "cursor": {
+        "start": { "x": 0.67, "y": 0.35 },
+        "end": { "x": 0.78, "y": 0.25 }
+      }
+    },
+    {
+      "image": "03-vacancies.png",
+      "duration": 2,
+      "zoom": { "from": 1.01, "to": 1.03 },
+      "pan": {
+        "from": { "x": 0.58, "y": 0.36 },
+        "to": { "x": 0.7, "y": 0.28 }
+      },
+      "cursor": {
+        "start": { "x": 0.72, "y": 0.2 },
+        "end": { "x": 0.82, "y": 0.17 }
+      }
+    },
+    {
+      "image": "04-vacancy-brief.png",
+      "duration": 2.4,
+      "zoom": { "from": 1, "to": 1.035 },
+      "pan": {
+        "from": { "x": 0.5, "y": 0.5 },
+        "to": { "x": 0.45, "y": 0.55 }
+      },
+      "cursor": {
+        "start": { "x": 0.32, "y": 0.56 },
+        "end": { "x": 0.32, "y": 0.63 }
+      }
+    },
+    {
+      "image": "05-ai-hiring-brief.png",
+      "duration": 3.4,
+      "zoom": { "from": 1, "to": 1.04 },
+      "pan": {
+        "from": { "x": 0.53, "y": 0.45 },
+        "to": { "x": 0.48, "y": 0.58 }
+      },
+      "cursor": {
+        "start": { "x": 0.57, "y": 0.58 },
+        "end": { "x": 0.4, "y": 0.72 }
+      }
+    },
+    {
+      "image": "06-ai-generating.png",
+      "duration": 1.8,
+      "zoom": { "from": 1.015, "to": 1.03 },
+      "pan": {
+        "from": { "x": 0.45, "y": 0.56 },
+        "to": { "x": 0.42, "y": 0.62 }
+      }
+    },
+    {
+      "image": "07-ai-role-profile.png",
+      "duration": 3.2,
+      "zoom": { "from": 1, "to": 1.035 },
+      "pan": {
+        "from": { "x": 0.52, "y": 0.35 },
+        "to": { "x": 0.6, "y": 0.58 }
+      },
+      "cursor": {
+        "start": { "x": 0.57, "y": 0.3 },
+        "end": { "x": 0.35, "y": 0.26 }
+      }
+    },
+    {
+      "image": "08-criteria.png",
+      "duration": 3.4,
+      "zoom": { "from": 1.01, "to": 1.04 },
+      "pan": {
+        "from": { "x": 0.52, "y": 0.38 },
+        "to": { "x": 0.62, "y": 0.6 }
+      },
+      "cursor": {
+        "start": { "x": 0.58, "y": 0.32 },
+        "end": { "x": 0.65, "y": 0.48 }
+      }
+    },
+    {
+      "image": "09-interview-plan.png",
+      "duration": 3,
+      "zoom": { "from": 1, "to": 1.032 },
+      "pan": {
+        "from": { "x": 0.55, "y": 0.32 },
+        "to": { "x": 0.62, "y": 0.42 }
+      },
+      "cursor": {
+        "start": { "x": 0.6, "y": 0.29 },
+        "end": { "x": 0.68, "y": 0.39 }
+      }
+    },
+    {
+      "image": "10-scoring-ranking.png",
+      "duration": 2.4,
+      "zoom": { "from": 1.01, "to": 1.035 },
+      "pan": {
+        "from": { "x": 0.5, "y": 0.38 },
+        "to": { "x": 0.65, "y": 0.46 }
+      }
+    },
+    {
+      "image": "11-candidate-experience.png",
+      "duration": 2.2,
+      "zoom": { "from": 1, "to": 1.03 },
+      "pan": {
+        "from": { "x": 0.48, "y": 0.38 },
+        "to": { "x": 0.61, "y": 0.48 }
+      }
+    },
+    {
+      "image": "12-governance.png",
+      "duration": 2.2,
+      "zoom": { "from": 1, "to": 1.03 },
+      "pan": {
+        "from": { "x": 0.5, "y": 0.38 },
+        "to": { "x": 0.66, "y": 0.44 }
+      }
+    },
+    {
+      "image": "13-preflight.png",
+      "duration": 1.4,
+      "zoom": { "from": 1.015, "to": 1.035 },
+      "pan": {
+        "from": { "x": 0.58, "y": 0.36 },
+        "to": { "x": 0.75, "y": 0.36 }
+      },
+      "cursor": {
+        "start": { "x": 0.68, "y": 0.28 },
+        "end": { "x": 0.75, "y": 0.18 }
+      }
+    },
+    {
+      "image": "14-candidate-preview.png",
+      "duration": 1.8,
+      "zoom": { "from": 1, "to": 1.028 },
+      "pan": {
+        "from": { "x": 0.5, "y": 0.48 },
+        "to": { "x": 0.55, "y": 0.55 }
+      }
+    },
+    {
+      "image": "15-published-code.png",
+      "duration": 3.2,
+      "zoom": { "from": 1, "to": 1.04 },
+      "pan": {
+        "from": { "x": 0.56, "y": 0.43 },
+        "to": { "x": 0.61, "y": 0.57 }
+      },
+      "cursor": {
+        "start": { "x": 0.59, "y": 0.53 },
+        "end": { "x": 0.61, "y": 0.65 }
+      }
+    },
+    {
+      "image": "16-candidate-entry.png",
+      "duration": 2.8,
+      "zoom": { "from": 1, "to": 1.035 },
+      "pan": {
+        "from": { "x": 0.5, "y": 0.48 },
+        "to": { "x": 0.5, "y": 0.56 }
+      },
+      "cursor": {
+        "start": { "x": 0.5, "y": 0.51 },
+        "end": { "x": 0.5, "y": 0.59 }
+      }
+    },
+    {
+      "image": "17-role-preview.png",
+      "duration": 2.8,
+      "zoom": { "from": 1, "to": 1.03 },
+      "pan": {
+        "from": { "x": 0.5, "y": 0.4 },
+        "to": { "x": 0.5, "y": 0.66 }
+      },
+      "cursor": {
+        "start": { "x": 0.57, "y": 0.63 },
+        "end": { "x": 0.5, "y": 0.78 }
+      }
+    },
+    {
+      "image": "18-consent-assessment.png",
+      "duration": 2.7,
+      "zoom": { "from": 1, "to": 1.035 },
+      "pan": {
+        "from": { "x": 0.5, "y": 0.36 },
+        "to": { "x": 0.5, "y": 0.74 }
+      },
+      "cursor": {
+        "start": { "x": 0.42, "y": 0.74 },
+        "end": { "x": 0.34, "y": 0.92 }
+      }
+    },
+    {
+      "image": "19-stage-intro.png",
+      "duration": 2.1,
+      "zoom": { "from": 1, "to": 1.03 },
+      "pan": {
+        "from": { "x": 0.5, "y": 0.48 },
+        "to": { "x": 0.5, "y": 0.62 }
+      },
+      "cursor": {
+        "start": { "x": 0.52, "y": 0.58 },
+        "end": { "x": 0.5, "y": 0.72 }
+      }
+    },
+    {
+      "image": "20-device-check.png",
+      "duration": 3.2,
+      "zoom": { "from": 1, "to": 1.035 },
+      "pan": {
+        "from": { "x": 0.5, "y": 0.28 },
+        "to": { "x": 0.5, "y": 0.64 }
+      }
+    },
+    {
+      "image": "21-live-interview-question.png",
+      "duration": 3.4,
+      "zoom": { "from": 1, "to": 1.035 },
+      "pan": {
+        "from": { "x": 0.42, "y": 0.45 },
+        "to": { "x": 0.62, "y": 0.5 }
+      },
+      "cursor": {
+        "start": { "x": 0.37, "y": 0.68 },
+        "end": { "x": 0.27, "y": 0.81 }
+      }
+    },
+    {
+      "image": "22-clip-ready.png",
+      "duration": 2,
+      "zoom": { "from": 1.01, "to": 1.03 },
+      "pan": {
+        "from": { "x": 0.42, "y": 0.52 },
+        "to": { "x": 0.38, "y": 0.68 }
+      },
+      "cursor": {
+        "start": { "x": 0.29, "y": 0.76 },
+        "end": { "x": 0.35, "y": 0.84 }
+      }
+    },
+    {
+      "image": "23-ai-processing.png",
+      "duration": 1.8,
+      "zoom": { "from": 1.015, "to": 1.03 },
+      "pan": {
+        "from": { "x": 0.4, "y": 0.53 },
+        "to": { "x": 0.35, "y": 0.73 }
+      }
+    },
+    {
+      "image": "24-transcript-ready.png",
+      "duration": 3.4,
+      "zoom": { "from": 1, "to": 1.04 },
+      "pan": {
+        "from": { "x": 0.52, "y": 0.48 },
+        "to": { "x": 0.68, "y": 0.74 }
+      },
+      "cursor": {
+        "start": { "x": 0.73, "y": 0.72 },
+        "end": { "x": 0.78, "y": 0.92 }
+      }
+    },
+    {
+      "image": "25-routing-next-question.png",
+      "duration": 1.7,
+      "zoom": { "from": 1.015, "to": 1.032 },
+      "pan": {
+        "from": { "x": 0.58, "y": 0.42 },
+        "to": { "x": 0.64, "y": 0.52 }
+      }
+    },
+    {
+      "image": "26-second-question.png",
+      "duration": 2.8,
+      "zoom": { "from": 1, "to": 1.035 },
+      "pan": {
+        "from": { "x": 0.42, "y": 0.46 },
+        "to": { "x": 0.63, "y": 0.52 }
+      },
+      "cursor": {
+        "start": { "x": 0.37, "y": 0.65 },
+        "end": { "x": 0.28, "y": 0.81 }
+      }
+    },
+    {
+      "image": "27-interview-complete.png",
+      "duration": 2,
+      "zoom": { "from": 1, "to": 1.03 },
+      "pan": {
+        "from": { "x": 0.5, "y": 0.46 },
+        "to": { "x": 0.56, "y": 0.58 }
+      },
+      "cursor": {
+        "start": { "x": 0.56, "y": 0.48 },
+        "end": { "x": 0.63, "y": 0.56 }
+      }
+    },
+    {
+      "image": "28-candidate-under-review.png",
+      "duration": 2,
+      "zoom": { "from": 1.01, "to": 1.03 },
+      "pan": {
+        "from": { "x": 0.5, "y": 0.44 },
+        "to": { "x": 0.5, "y": 0.56 }
+      }
+    },
+    {
+      "image": "29-hr-candidate-detail.png",
+      "duration": 3.1,
+      "zoom": { "from": 1, "to": 1.035 },
+      "pan": {
+        "from": { "x": 0.55, "y": 0.32 },
+        "to": { "x": 0.7, "y": 0.44 }
+      },
+      "cursor": {
+        "start": { "x": 0.75, "y": 0.44 },
+        "end": { "x": 0.88, "y": 0.46 }
+      }
+    },
+    {
+      "image": "30-ai-evaluation.png",
+      "duration": 3,
+      "zoom": { "from": 1.01, "to": 1.035 },
+      "pan": {
+        "from": { "x": 0.55, "y": 0.34 },
+        "to": { "x": 0.76, "y": 0.44 }
+      }
+    },
+    {
+      "image": "31-scorecard-summary.png",
+      "duration": 5.6,
+      "zoom": { "from": 1, "to": 1.04 },
+      "pan": {
+        "from": { "x": 0.5, "y": 0.3 },
+        "to": { "x": 0.64, "y": 0.58 }
+      },
+      "cursor": {
+        "start": { "x": 0.55, "y": 0.32 },
+        "end": { "x": 0.7, "y": 0.64 }
+      }
+    },
+    {
+      "image": "32-scorecard-evidence.png",
+      "duration": 5.6,
+      "zoom": { "from": 1, "to": 1.045 },
+      "pan": {
+        "from": { "x": 0.55, "y": 0.38 },
+        "to": { "x": 0.68, "y": 0.68 }
+      },
+      "cursor": {
+        "start": { "x": 0.62, "y": 0.48 },
+        "end": { "x": 0.73, "y": 0.76 }
+      }
+    },
+    {
+      "image": "33-ranking.png",
+      "duration": 3.3,
+      "zoom": { "from": 1.015, "to": 1.04 },
+      "pan": {
+        "from": { "x": 0.56, "y": 0.36 },
+        "to": { "x": 0.66, "y": 0.52 }
+      },
+      "cursor": {
+        "start": { "x": 0.62, "y": 0.46 },
+        "end": { "x": 0.75, "y": 0.55 }
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "whitebox-ai",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "node scripts/start-standalone.mjs",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test:unit": "tsc -p tests/tsconfig.json && node --test tests/dist/tests/*.test.js",
+    "test:e2e": "node e2e-test.mjs",
+    "test:interview:real": "node scripts/smoke-real-interview.mjs",
+    "test": "npm run test:unit && npm run retention:verify",
+    "check": "npm run lint && npm run typecheck && npm run test && npm run build",
+    "db:migrate": "node scripts/migrate.mjs",
+    "auth:hash-password": "node scripts/hash-password.mjs",
+    "retention:run": "node scripts/retention-worker.mjs",
+    "retention:verify": "node scripts/verify-retention-state.mjs"
+  },
+  "dependencies": {
+    "lucide-react": "^0.525.0",
+    "next": "^15.5.21",
+    "openai": "^7.1.0",
+    "pg": "^8.22.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.10",
+    "@types/node": "^22.15.0",
+    "@types/pg": "^8.20.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^15.5.21",
+    "playwright": "^1.61.1",
+    "tailwindcss": "^4.1.10",
+    "typescript": "^5.8.0",
+    "vitest": "^4.1.10"
+  }
+}

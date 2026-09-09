@@ -1,0 +1,76 @@
+/* ============================================================
+   WHITEBOX AI — DESIGN TOKENS
+   Source of truth: MASTERDOC · Book I · Part III
+   Elevation = 1px hairlines, not shadows. Accent = light, not paint.
+   ============================================================ */
+
+:root {
+  /* System-first stacks keep production builds deterministic and offline-safe. */
+  --font-inter: Inter, "Segoe UI", Arial, sans-serif;
+  --font-jetbrains: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+  --font-space: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+  --font-instrument: "Instrument Serif", Georgia, serif;
+
+  /* 3.1 — base (dark theme) */
+  --void: #060608;
+  --void-2: #0a0a0c;
+  --surface: #0e0e11;
+  --surface-2: #141418;
+  --hairline: rgba(255, 255, 255, 0.06);
+  --hairline-strong: rgba(255, 255, 255, 0.12);
+  --grid-line: rgba(255, 255, 255, 0.03);
+
+  /* 3.2 — text & lines (white-on-black dominant) */
+  --paper: #ffffff;
+  --text-hi: #ececee;
+  --text-mid: #a6a6ab;
+  --text-lo: #6a6a70;
+  --text-disabled: #3a3a40;
+  --line-strong: #9a9a9e;
+  --line-mid: #55555a;
+  --line-soft: #2a2a2e;
+
+  /* 3.3 — inverted "white box" segments */
+  --wb-paper: #f4f4f2;
+  --wb-ink: #0a0a0c;
+  --wb-text: #17171a;
+  --wb-hairline: rgba(0, 0, 0, 0.1);
+
+  /* 3.4 — accent system: ONE accent, two roles (+ swap options)
+     Skin: EMBER→DUNE-GOLD (warm register, per updated art direction).
+     Token names keep the iris-* contract so the swap stays one-place. */
+  --iris-a: #ffc59a;
+  --iris-b: #ff6a2e;
+  --iris-c: #ff9a6e;
+  --iris-d: #c9a86a;
+  --iris-gradient: linear-gradient(120deg, #ff6a2e, #ff9a6e, #c9a86a);
+  --ember: #ff6a2e;
+  --dune-gold: #c9a86a;
+  /* single-variable swap path: set --accent-primary to var(--dune-gold)/var(--ember) to re-skin */
+  --accent-primary: var(--ember);
+  --accent-action: var(--ember);
+
+  /* 3.5 — semantic */
+  --pos: #46d08a;
+  --neg: #e5484d;
+  --warn: #e8a93b;
+  --info: #7b93ff;
+}
+
+/* Inverted white-box scope — "a white box you can see into" */
+.wb {
+  --void: #f4f4f2;
+  --void-2: #efefec;
+  --surface: #ffffff;
+  --surface-2: #fafaf8;
+  --hairline: rgba(0, 0, 0, 0.1);
+  --hairline-strong: rgba(0, 0, 0, 0.18);
+  --grid-line: rgba(0, 0, 0, 0.04);
+  --paper: #0a0a0c;
+  --text-hi: #17171a;
+  --text-mid: #4a4a50;
+  --text-lo: #7a7a80;
+  --line-soft: #d8d8d4;
+  background-color: var(--wb-paper);
+  color: var(--wb-text);
+}

@@ -1,0 +1,195 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+@theme inline {
+  --color-void: var(--void);
+  --color-void2: var(--void-2);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface-2);
+  --color-paper: var(--paper);
+  --color-hi: var(--text-hi);
+  --color-mid: var(--text-mid);
+  --color-lo: var(--text-lo);
+  --color-disabled: var(--text-disabled);
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
+  --color-line-soft: var(--line-soft);
+  --color-wbpaper: var(--wb-paper);
+  --color-wbink: var(--wb-ink);
+  --color-irisa: var(--iris-a);
+  --color-irisb: var(--iris-b);
+  --color-irisc: var(--iris-c);
+  --color-irisd: var(--iris-d);
+  --color-ember: var(--ember);
+  --color-dune: var(--dune-gold);
+  --color-pos: var(--pos);
+  --color-neg: var(--neg);
+  --color-warn: var(--warn);
+  --color-info: var(--info);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+  --font-display: var(--font-space);
+  --font-serif: var(--font-instrument);
+}
+
+html {
+  background: var(--void);
+  color: var(--text-hi);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--iris-b) 35%, transparent);
+}
+
+/* ---- signature utilities ---------------------------------- */
+
+/* mono micro-label — the "trust001 / security" HUD language */
+.hud-label {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-lo);
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* graph-paper grid under "engineering" surfaces */
+.grid-paper {
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* topographic contour texture (material refs) at low opacity */
+.contour-bg {
+  position: relative;
+  isolation: isolate;
+}
+.contour-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: url("/textures/contour.jpeg");
+  background-size: 1200px;
+  opacity: 0.1;
+  filter: brightness(0.75) contrast(1.05);
+  pointer-events: none;
+}
+.contour-bg-soft::before {
+  opacity: 0.06;
+}
+
+/* concrete/speckle grain so white never reads sterile */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* iridescent hairline — accent is light, not paint */
+.iris-line {
+  background: var(--iris-gradient);
+}
+.iris-text {
+  background: var(--iris-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* focus ring = 1px iris + faint outer bloom */
+.iris-focus:focus-visible,
+.iris-focus:focus-within {
+  outline: none;
+  box-shadow: 0 0 0 1px var(--iris-b),
+    0 0 12px 0 color-mix(in srgb, var(--iris-b) 30%, transparent);
+}
+
+/* corner-bracket L-marks — signature HUD hover detail */
+.brackets {
+  position: relative;
+}
+.brackets::before,
+.brackets::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 0 solid var(--line-strong);
+  transition: width 0.18s ease, height 0.18s ease, opacity 0.18s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+.brackets::before {
+  top: -1px;
+  left: -1px;
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+.brackets::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+}
+.brackets:hover::before,
+.brackets:hover::after {
+  width: 16px;
+  height: 16px;
+  opacity: 1;
+}
+
+/* interactive card hover — hairline → iris-tinted, lift */
+.card-hover {
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--iris-b) 40%, var(--hairline-strong));
+}
+
+/* glowing white cube (brand anchor) — pure CSS, static-friendly */
+.cube-glow {
+  filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.28))
+    drop-shadow(0 0 64px rgba(255, 255, 255, 0.12));
+}
+
+@keyframes prism-drift {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(40deg); }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.pulse-dot {
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--surface) 25%, var(--surface-2) 50%, var(--surface) 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.2s linear infinite;
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

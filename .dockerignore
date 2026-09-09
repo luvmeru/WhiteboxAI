@@ -1,0 +1,11 @@
+.git
+.next
+node_modules
+.data
+screenshots
+tests/dist
+*.log
+.env*
+!.env.example
+API.md
+*.tsbuildinfo

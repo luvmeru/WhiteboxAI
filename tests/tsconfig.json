@@ -1,0 +1,28 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "incremental": false,
+    "isolatedModules": false,
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "noEmit": false,
+    "outDir": "./dist",
+    "rootDir": "..",
+    "types": ["node"]
+  },
+  "include": [
+    "./**/*.test.ts",
+    "../lib/engine.ts",
+    "../lib/store.ts",
+    "../lib/server/ai-rollout.ts",
+    "../lib/server/artifacts.ts",
+    "../lib/server/local-api-key.ts",
+    "../lib/server/transcript-provenance.ts"
+    ,"../lib/server/audit-canonical.cjs"
+  ],
+  "exclude": [
+    "../node_modules",
+    "./dist"
+  ]
+}
